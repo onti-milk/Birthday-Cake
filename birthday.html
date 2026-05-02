@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Lato:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&family=Prompt:wght@300;400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: linear-gradient(160deg,#fce4ec,#f8bbd0 60%,#fce4ec);
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; padding:30px 0 60px;
+  font-family:'Lato','Prompt', 'Kanit', sans-serif; overflow-x:hidden;
+}
+.star { position:fixed; border-radius:50%; background:rgba(255,255,255,.8); pointer-events:none; animation:twinkle 3s ease-in-out infinite; }
+@keyframes twinkle { 0%,100%{opacity:.15;transform:scale(1)} 50%{opacity:1;transform:scale(1.6)} }
+.conf { position:fixed; top:-14px; pointer-events:none; animation:confFall 5s linear infinite; z-index:0; }
+@keyframes confFall { 0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(110vh) rotate(720deg);opacity:.1} }
+
+.cake-wrap { position:relative; width:300px; height:230px; display:flex; align-items:flex-end; justify-content:center; flex-shrink:0; z-index:1; }
+.plate { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:200px; height:10px; background:#e8b4c0; border-radius:50%; }
+.cake { position:absolute; bottom:8px; display:flex; flex-direction:column; align-items:center; }
+.frost-top { width:156px; height:12px; background:white; border-radius:8px 8px 0 0; }
+.layer-top { width:156px; height:40px; background:#8B5E3C; position:relative; }
+.layer-top::after { content:''; position:absolute; top:13px; left:0; right:0; height:3px; background:rgba(0,0,0,.12); }
+.drip { width:160px; height:14px; background:white; position:relative; }
+.drip::after { content:''; position:absolute; bottom:-11px; left:0; width:160px; height:14px; background:white; clip-path:polygon(0% 0%,5% 0%,7% 100%,11% 0%,20% 0%,22% 90%,26% 0%,36% 0%,39% 100%,43% 0%,54% 0%,56% 80%,60% 0%,70% 0%,73% 100%,77% 0%,88% 0%,90% 85%,94% 0%,100% 0%,100% 0%,0% 0%); }
+.layer-bot { width:160px; height:55px; background:#8B5E3C; border-radius:0 0 3px 3px; position:relative; }
+.layer-bot::before { content:''; position:absolute; top:14px; left:0; right:0; height:3px; background:rgba(0,0,0,.12); }
+.layer-bot::after  { content:''; position:absolute; top:28px; left:0; right:0; height:3px; background:rgba(0,0,0,.12); }
+
+.candle-group { position:absolute; bottom:118px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; }
+.flame-wrap { position:relative; width:14px; height:22px; margin-bottom:-2px; }
+.flame { width:12px; height:20px; background:radial-gradient(ellipse at 50% 80%,#fff176 0%,#FFC107 40%,#ff7043 100%); border-radius:50% 50% 30% 30%; position:absolute; bottom:0; left:1px; animation:flicker .35s ease-in-out infinite alternate; transform-origin:bottom center; }
+.flame-inner { position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:5px; height:9px; background:rgba(255,255,255,.7); border-radius:50% 50% 30% 30%; }
+.glow { position:absolute; top:-6px; left:50%; transform:translateX(-50%); width:34px; height:34px; background:radial-gradient(circle,rgba(255,210,50,.55) 0%,transparent 70%); border-radius:50%; pointer-events:none; animation:glowP .35s ease-in-out infinite alternate; }
+@keyframes flicker { 0%{transform:scaleX(1) scaleY(1) rotate(-2deg)} 100%{transform:scaleX(.85) scaleY(1.1) rotate(2deg)} }
+@keyframes glowP { 0%{transform:translateX(-50%) scale(1);opacity:.6} 100%{transform:translateX(-50%) scale(1.35);opacity:1} }
+.candle-stick { width:10px; height:34px; background:linear-gradient(to right,#fce4ec,#f8bbd0,#fce4ec); border-radius:2px; position:relative; }
+.candle-stick::before { content:''; position:absolute; inset:0; border-radius:2px; background:repeating-linear-gradient(to bottom,transparent 0px,transparent 5px,rgba(255,255,255,.4) 5px,rgba(255,255,255,.4) 7px); }
+.candle-base { width:16px; height:6px; background:#f48fb1; border-radius:50%; margin-top:-1px; }
+
+.cake-msg { margin-top:14px; text-align:center; color:#b05070; z-index:1; }
+.cake-msg .h1 { font-family:'Dancing Script',cursive; font-size:26px; animation:fadeUp 1s ease both .3s; }
+.cake-msg .h2 { font-size:13px; letter-spacing:1px; font-style:italic; color:#c06080; animation:fadeUp 1s ease both .5s; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+.env-section { margin-top:24px; position:relative; width:300px; flex-shrink:0; z-index:1; }
+.open-btn { display:block; width:100%; padding:10px 0; background:none; border:none; text-align:center; color:rgba(160,64,90,.55); font-size:11px; letter-spacing:3px; text-transform:uppercase; cursor:pointer; font-family:'Lato',sans-serif; animation:blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:.35} 50%{opacity:1} }
+.open-btn:hover { color:#c06080; }
+.env-container { position:relative; width:300px; height:200px; perspective:800px; }
+.envelope { position:relative; width:300px; height:200px; border-radius:4px; overflow:visible; }
+.env-body { position:absolute; inset:0; background:linear-gradient(160deg,#f8bbd0,#fce4ec); border-radius:4px; box-shadow:0 8px 30px rgba(180,80,110,.2); }
+.env-body::before { content:''; position:absolute; bottom:0; left:0; width:0; height:0; border-style:solid; border-width:100px 0 0 150px; border-color:transparent transparent transparent #f48fb1; }
+.env-body::after  { content:''; position:absolute; bottom:0; right:0; width:0; height:0; border-style:solid; border-width:100px 150px 0 0; border-color:transparent #f48fb1 transparent transparent; }
+.env-bottom { position:absolute; bottom:0; left:0; width:300px; height:105px; overflow:hidden; z-index:1; border-radius:0 0 4px 4px; }
+.env-bottom::before { content:''; position:absolute; top:0; left:-5px; width:310px; height:210px; background:#f48fb1; clip-path:polygon(0 100%,50% 0%,100% 100%); }
+.env-flap { position:absolute; top:0; left:0; width:300px; height:105px; z-index:10; transform-origin:top center; overflow:hidden; transition:transform .7s cubic-bezier(.4,0,.2,1); }
+.env-flap::before { content:''; position:absolute; top:-5px; left:-5px; width:310px; height:215px; background:#f9c0d0; clip-path:polygon(0 0,50% 100%,100% 0); }
+.envelope.open .env-flap { transform:rotateX(-180deg); }
+.seal { position:absolute; top:40px; left:50%; transform:translateX(-50%); width:32px; height:32px; background:linear-gradient(135deg,#e91e63,#c2185b); border-radius:50%; z-index:11; display:flex; align-items:center; justify-content:center; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,.2); transition:opacity .3s; }
+.envelope.open .seal { opacity:0; }
+.inner-card {
+  position: fixed; /* 🔥 เปลี่ยนเป็น fixed */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 100%) scale(0.9); /* เริ่มจากล่าง */
+  width: 270px;
+  background: white;
+  border-radius: 12px;
+  padding: 24px 20px 20px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(180,80,110,.15);
+  z-index: 999; /* ให้อยู่บนสุด */
+  opacity: 0;
+  transition: all .6s cubic-bezier(.4,0,.2,1);
+}
+
+/* 🔥 ตอนเปิด */
+.envelope.open .inner-card {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+.ic-emoji { font-size:28px; margin-bottom:8px; }
+/* หัวข้อในการ์ด */
+.ic-title {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 500;
+}
+
+/* เนื้อข้อความ */
+.ic-body {
+  font-family: 'Prompt', sans-serif;
+  font-size: 14px;
+  line-height: 2.2;
+  color: #666;
+  font-style: normal;
+}
+.ic-hearts { font-size:15px; margin-top:4px; letter-spacing:4px; }
+.close-btn { display:none; margin:12px auto 0; background:none; border:1.5px solid #f48fb1; color:#c06080; font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:6px 18px; border-radius:20px; cursor:pointer; font-family:'Lato',sans-serif; transition:background .2s,color .2s; }
+.close-btn:hover { background:#f48fb1; color:white; }
+</style>
+</head>
+<body>
+<div id="sw"></div>
+<div id="cw"></div>
+
+<div class="cake-wrap">
+  <div class="candle-group">
+    <div class="flame-wrap">
+      <div class="glow"></div>
+      <div class="flame"><div class="flame-inner"></div></div>
+    </div>
+    <div class="candle-stick"></div>
+    <div class="candle-base"></div>
+  </div>
+  <div class="cake">
+    <div class="frost-top"></div>
+    <div class="layer-top"></div>
+    <div class="drip"></div>
+    <div class="layer-bot"></div>
+  </div>
+  <div class="plate"></div>
+</div>
+
+<div class="cake-msg">
+  <div class="h1">happy birthday!</div>
+  <div class="h2">Love</div>
+</div>
+
+<div class="env-section">
+  <button class="open-btn" id="openBtn">▼ &nbsp; tap to open &nbsp; ▼</button>
+  <div class="env-container">
+    <div class="envelope" id="envelope">
+      <div class="env-body"></div>
+      <div class="env-bottom"></div>
+      <div class="inner-card">
+        <div class="ic-emoji">🎂🎉✨</div>
+        <div class="ic-title">Happy Birthday!</div>
+        <div class="ic-body">
+          Happy Birthday นะที่รัก 🥰💕<br>
+          ขอให้มีความสุขมากกกๆ 🌈<br>
+          สุขภาพร่างกายแข็งแรง 💪🌟<br>
+          Enjoy your life 🦋🌸<br>
+          ขอให้สมหวังทุกอย่าง 🌙⭐<br><br>
+          <span style="font-size:15px;font-style:normal;">rak makmak kub 🫶🧡</span>
+        </div>
+        <div class="ic-hearts">🌸 💕 🌸 💕 🌸</div>
+        <button class="close-btn" id="closeBtn">ปิดการ์ด</button>
+      </div>
+      <div class="env-flap"></div>
+      <div class="seal">💌</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var sw=document.getElementById('sw');
+  for(var i=0;i<55;i++){
+    var s=document.createElement('div');
+    s.className='star';
+    s.style.left=(Math.random()*100)+'vw';
+    s.style.top=(Math.random()*100)+'vh';
+    s.style.width=s.style.height=(2+Math.random()*4)+'px';
+    s.style.animationDelay=(Math.random()*3)+'s';
+    s.style.animationDuration=(2+Math.random()*2)+'s';
+    sw.appendChild(s);
+  }
+  var cw=document.getElementById('cw');
+  var cols=['#f06292','#ce93d8','#80cbc4','#fff176','#ffcc80','#ef9a9a','#a5d6a7','#f48fb1'];
+  for(var j=0;j<28;j++){
+    var c=document.createElement('div');
+    c.className='conf';
+    c.style.left=(Math.random()*100)+'vw';
+    c.style.width=c.style.height=(6+Math.random()*7)+'px';
+    c.style.background=cols[Math.floor(Math.random()*cols.length)];
+    c.style.borderRadius=Math.random()>.5?'50%':'2px';
+    c.style.animationDuration=(3+Math.random()*5)+'s';
+    c.style.animationDelay=(Math.random()*5)+'s';
+    cw.appendChild(c);
+  }
+  var env=document.getElementById('envelope');
+  var openBtn=document.getElementById('openBtn');
+  var closeBtn=document.getElementById('closeBtn');
+  openBtn.onclick=function(){
+    env.classList.add('open');
+    openBtn.style.display='none';
+    setTimeout(function(){closeBtn.style.display='block';},1100);
+  };
+  closeBtn.onclick=function(){
+    env.classList.remove('open');
+    closeBtn.style.display='none';
+    setTimeout(function(){openBtn.style.display='block';},700);
+  };
+})();
+
+var env=document.getElementById('envelope');
+var openBtn=document.getElementById('openBtn');
+var closeBtn=document.getElementById('closeBtn');
+
+// 👇 ใส่ตรงนี้
+env.onclick = function(){
+  env.classList.toggle('open');
+};
+</script>
+</body>
+</html>
