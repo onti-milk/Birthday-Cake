@@ -6,6 +6,7 @@
 <title>Happy Birthday</title>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Lato:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&family=Prompt:wght@300;400&display=swap" rel="stylesheet">
+
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -105,6 +106,7 @@ body {
 </style>
 </head>
 <body>
+  <audio id="hbdSong" src="hbd.mp3" autoplay loop muted></audio>
 <div id="sw"></div>
 <div id="cw"></div>
 
@@ -170,6 +172,7 @@ body {
     s.style.animationDuration=(2+Math.random()*2)+'s';
     sw.appendChild(s);
   }
+
   var cw=document.getElementById('cw');
   var cols=['#f06292','#ce93d8','#80cbc4','#fff176','#ffcc80','#ef9a9a','#a5d6a7','#f48fb1'];
   for(var j=0;j<28;j++){
@@ -183,29 +186,58 @@ body {
     c.style.animationDelay=(Math.random()*5)+'s';
     cw.appendChild(c);
   }
+
   var env=document.getElementById('envelope');
   var openBtn=document.getElementById('openBtn');
   var closeBtn=document.getElementById('closeBtn');
+  var song = document.getElementById('hbdSong');
+song.volume = 0.2;
+
+openBtn.onclick=function(){
+  env.classList.add('open');
+  openBtn.style.display='none';
+
+  song.play();
+
+  setTimeout(function(){
+    closeBtn.style.display='block';
+  },1100);
+};
+
+  // 👉 กดปุ่มเปิด
   openBtn.onclick=function(){
     env.classList.add('open');
     openBtn.style.display='none';
-    setTimeout(function(){closeBtn.style.display='block';},1100);
+
+    song.play().catch(e=>console.log(e)); // 🔥 เล่นเพลง
+
+    setTimeout(function(){
+      closeBtn.style.display='block';
+    },1100);
   };
+
+  // 👉 กดปิด
   closeBtn.onclick=function(){
     env.classList.remove('open');
     closeBtn.style.display='none';
-    setTimeout(function(){openBtn.style.display='block';},700);
+
+    song.pause();
+    song.currentTime=0;
+
+    setTimeout(function(){
+      openBtn.style.display='block';
+    },700);
   };
+
+  var song = document.getElementById('hbdSong');
+
+// 👉 พอมี interaction ครั้งแรก (คลิกตรงไหนก็ได้)
+document.body.addEventListener('click', function(){
+  song.muted = false;  // 🔥 เปิดเสียง
+  song.play().catch(e=>console.log(e));
+}, { once: true });
+
 })();
-
-var env=document.getElementById('envelope');
-var openBtn=document.getElementById('openBtn');
-var closeBtn=document.getElementById('closeBtn');
-
-// 👇 ใส่ตรงนี้
-env.onclick = function(){
-  env.classList.toggle('open');
-};
 </script>
 </body>
 </html>
